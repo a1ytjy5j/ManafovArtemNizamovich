@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='history.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>История решений</title>
+    <nav>
+      <ul class="horizontal-menu">
+          <li><a href="http://127.0.0.1:5000/">Главная</a></li>
+          <li><a href="http://127.0.0.1:5000/calc">Калькуляторы</a></li>
+          <li><a href="http://127.0.0.1:5000/history">История решений</a></li>
+          <li><a href="https://vk.com/f4ij490fjf230ff4ut4089ggug49u3">Контакты</a></li>
+          <li><a href="http://127.0.0.1:5000/about_as">О сайте</a></li>
+      </ul>
+    </nav>
+</head>
+<body>
+
+<section>
+    <h1>История решений</h1>
+    <ul>
+        {% for record in history %}
+            <li>
+                <strong>{{ record.equation }}</strong>: {{ record.result or record.solution }}
+            </li>
+        {% else %}
+            <li>История решений пока пуста.</li>
+        {% endfor %}
+    </ul>
+</section>
+{% if result %}
+        <div>
+            <strong>Результат:</strong>
+            <p>{{ result | safe }}</p>
+        </div>
+    {% endif %}
+    <footer>
+  </footer>
+
+</body>
+</html>

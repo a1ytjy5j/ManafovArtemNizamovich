@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Решители уравнений</title>
+    <link rel="icon" href="templates\1.ico" />
+
+</head>
+    <nav>
+      <ul class="horizontal-menu">
+          <li><a href="http://127.0.0.1:5000">Главная</a></li>
+          <li><a href="http://127.0.0.1:5000/calc">Калькуляторы</a></li>
+          <li><a href="http://127.0.0.1:5000/history">История решений</a></li>
+          <li><a href="https://vk.com/f4ij490fjf230ff4ut4089ggug49u3">Контакты</a></li>
+          <li><a href="http://127.0.0.1:5000/about_as">О сайте</a></li>
+      </ul>
+    </nav>
+
+    <h1>Калькулятор квадратных уравнений</h1>
+    <h3>Пример квадратного уравнения:</h3>
+    <h3>7х2-5х+3 = 0, в этом уравнении а = 7, b = -5, с = 3;</h3>
+    <form action="{{ url_for('home') }}" method="post">
+        <input type="text" name="a" placeholder="Введите - a" required>
+        <input type="text" name="b" placeholder="Введите - b" required>
+        <input type="text" name="c" placeholder="Введите - c" required>
+        <button type="submit">Решить квадратное уравнение</button>
+    </form>
+
+
+
+    {% if result %}
+        <div>
+            <strong>Результат:</strong>
+            <p>{{ result | safe }}</p>
+        </div>
+    {% endif %}
+
+    <hr>
+
+    <h1>Решение системы линейных уравнений</h1>
+    <h3>Пример системы линейных уравнений:</h3>
+    <h3>2x-y=1, в этом уравнении a1 = 2, b1 = -1, c1 = 1</h3>
+    <h3>7x-6y=-4, в этом уравнении a2 = 7, b2 = -6, c2 = -4</h3>
+    <form action="{{ url_for('home') }}" method="post">
+        <input type="text" name="a1" placeholder="Введите - a1" required>
+        <input type="text" name="b1" placeholder="Введите - b1" required>
+        <input type="text" name="c1" placeholder="Введите - c1" required>
+        <input type="text" name="a2" placeholder="Введите - a2" required>
+        <input type="text" name="b2" placeholder="Введите - b2" required>
+        <input type="text" name="c2" placeholder="Введите - c2" required>
+        <button type="submit">Решить систему линейных уравнений</button>
+    </form>
+    {% for record in history %}
+    <div class="equation-block">
+        <strong>Уравнение:</strong> {{ record.equation }}<br>
+        {% if record.result.a %}
+            <strong>a:</strong> {{ record.result.a }}<br>
+            <strong>b:</strong> {{ record.result.b }}<br>
+            <strong>c:</strong> {{ record.result.c }}<br>
+            <strong>Дискриминант (D):</strong> {{ record.result.D }}<br>
+            <strong>x1:</strong> {{ record.result.x1 }}<br>
+            <strong>x2:</strong> {{ record.result.x2 }}<br>
+        {% else %}
+            {{ record.result }}
+        {% endif %}
+    </div>
+{% endfor %}
+    {% if solution %}
+        <div>
+            <strong>Решение системы линейных уравнений:</strong>
+            {% if solution == None %}
+                <p1>Уравнения имеют бесчисленное множество решений или не имеют решений вовсе.</p1>
+            {% else %}
+                <p1>x = {{ solution[0] }}</p1>
+                <p1>y = {{ solution[1] }}</p1>
+            {% endif %}
+        </div>
+    {% endif %}
+    <h1>  </h1>
+
+
+</body>
+</html>
