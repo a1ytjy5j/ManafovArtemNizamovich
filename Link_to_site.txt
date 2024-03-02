@@ -1,3 +1,3 @@
- https://5a50-128-65-143-25.ngrok-free.app
+https://096d-2a03-d000-3283-4999-5893-82df-4717-9c56.ngrok-free.app
 Пароль: admin
 Логин: admin
